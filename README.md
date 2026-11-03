@@ -4,8 +4,8 @@
 
 **Group Members:**
 - Jovan Jose Asker Fredy
-- _Partner 1_
-- _Partner 2_
+- Raagya Gehlot
+- Andrew Johnson
 
 ---
 
