@@ -1,4 +1,4 @@
-# Project 2 – A Simple Bulletin Board Using Socket Programming
+# A Simple Bulletin Board Using Socket Programming
 
 **CS4065 – Computer Networks and Networked Computing**
 
