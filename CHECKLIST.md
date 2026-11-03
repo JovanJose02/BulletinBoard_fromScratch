@@ -3,6 +3,7 @@
 ## Part 1 – Public Message Board (40%)
 
 ### Server (Python)
+
 - [ ] Uses plain TCP sockets only (no other networking libraries)
 - [ ] Listens on a non-system port (above 1024) and keeps running
 - [ ] Starts one thread per client connection
@@ -22,6 +23,7 @@
 - [ ] Uses locks on shared data so threads don't conflict
 
 ### Client (Java)
+
 - [ ] Uses plain `Socket` only (no other networking libraries)
 - [ ] Runs a separate thread that listens for server notifications while the user types
 - [ ] `%connect <address> <port>`
@@ -36,6 +38,7 @@
 - [ ] Shows errors for commands used before connecting or joining
 
 ### Protocol
+
 - [ ] Agree on one message format (plain text or JSON) for both sides
 - [ ] Write down the request and response format for every command
 - [ ] Keep notifications the server pushes separate from replies to requests
@@ -45,6 +48,7 @@
 ## Part 2 – Multiple Private Groups (30%)
 
 ### Server (Python)
+
 - [ ] Sets up **5 groups**, each with an ID and a name
 - [ ] Sends the list of groups when a client connects
 - [ ] Lets users join a group by **ID or name**
@@ -59,6 +63,7 @@
 - [ ] Removes a user from every group when they disconnect
 
 ### Client (Java)
+
 - [ ] `%groups`
 - [ ] `%groupjoin <group>`
 - [ ] `%grouppost <group> <subject> <body>`
@@ -68,12 +73,14 @@
 - [ ] Labels group notifications with the group they came from
 
 ### Integration
+
 - [ ] Parts 1 and 2 work in the **same running program**
 - [ ] Users can switch between the public board and groups without disconnecting
 
 ---
 
 ## Documentation and Submission (15%)
+
 - [ ] Clear comments and meaningful variable names in both client and server
 - [ ] README lists all 3 names at the very top
 - [ ] README explains how to compile and run both programs
@@ -85,10 +92,12 @@
 - [ ] Zip the folder without any binaries (no `.class` files) and submit it to Canvas
 
 ## Bonus
-- [x] Client and server in different languages (+~5%)
+
+- [ ] Client and server in different languages (+~5%)
 - [ ] GUI for the client (up to +5%)
 
 ## Testing Before the Demo
+
 - [ ] Run 3 or more clients at once and check that join and leave notifications reach everyone
 - [ ] Check that a client joining late sees only the last 2 messages
 - [ ] Check that a taken username is rejected
