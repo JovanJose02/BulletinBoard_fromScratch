@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 // Bulletin board console client. Run: java Client
 public class Client {
+    // Connection to the server
     static Socket socket;
     static PrintWriter out;
     static volatile boolean hasName = false;
 
+    // Reads what the user types. Lines without % are sent as the username.
     public static void main(String[] args) {
         System.out.println("Bulletin board client. Type %help for commands.");
         Scanner input = new Scanner(System.in);
@@ -25,6 +27,7 @@ public class Client {
         disconnect();
     }
 
+    // Turns a % command into a protocol message. The public board is group 0.
     static void runCommand(String line) {
         String[] parts = line.split("\\s+", 2);
         String command = parts[0].toLowerCase();
@@ -35,11 +38,13 @@ public class Client {
 
         switch (command) {
             case "%connect":      connect(first, second); break;
+            // Part 1
             case "%join":         send("JOIN", "0"); break;
             case "%post":         post("0", rest); break;
             case "%users":        send("USERS", "0"); break;
             case "%leave":        send("LEAVE", "0"); break;
             case "%message":      send("MESSAGE", "0", rest); break;
+            // Part 2
             case "%groups":       send("GROUPS"); break;
             case "%groupjoin":    send("JOIN", rest); break;
             case "%grouppost":    post(first, second); break;
@@ -69,6 +74,7 @@ public class Client {
         send("POST", group, parts[0].trim(), parts[1].trim());
     }
 
+    // Opens the socket and starts a thread that listens to the server
     static void connect(String host, String port) {
         if (socket != null) {
             System.out.println("Already connected.");
@@ -85,6 +91,7 @@ public class Client {
         }
     }
 
+    // Prints every line the server sends until the connection closes
     static void listen(BufferedReader in) {
         try {
             String line;
@@ -100,6 +107,7 @@ public class Client {
         hasName = false;
     }
 
+    // Prints a server message in a readable way
     static void show(String[] f) {
         switch (f[0]) {
             case "WELCOME":     System.out.println(f[1] + " Enter a username:"); break;
@@ -127,6 +135,7 @@ public class Client {
         }
     }
 
+    // Sends the fields joined by tabs. Tabs typed by the user become spaces.
     static void send(String... fields) {
         if (out == null) {
             System.out.println("Not connected. Use %connect <host> <port>.");
@@ -136,6 +145,7 @@ public class Client {
         out.println(String.join("\t", fields));
     }
 
+    // Tells the server we are leaving and closes the socket
     static void disconnect() {
         if (out != null) send("EXIT");
         try {
