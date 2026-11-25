@@ -89,7 +89,7 @@
 - [X] README describes major issues and how we handled them
 - [X] Makefile (optional, but useful for compiling the Java client)
 - [X] Folder named `Project2-JoseAskerFredy-Gehlot-Johnson`
-- [ ] Zip the folder without any binaries (no `.class` files) and submit it to Canvas
+- [X] Zip the folder without any binaries (no `.class` files) and submit it to Canvas
 
 ## Bonus
 
