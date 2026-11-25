@@ -141,13 +141,33 @@ In the console client, type `%connect <host> <port>` first, then your username w
 
 ## Protocol
 
-Messages are plain text, one per line, with fields separated by a TAB.
+Messages are plain text, one per line, with fields separated by a TAB. The first field is the message type and the rest are its arguments. Below, `<group>` is a group ID or name. The public board is group `0`, and groups `1`–`5` are the private groups.
 
-| Client → Server                                                                      | Server → Client                                                                                                                                      |
-| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `NAME`, `GROUPS`, `JOIN`, `LEAVE`, `USERS`, `POST`, `MESSAGE`, `EXIT` | `WELCOME`, `NAME_OK`, `NAME_BAD`, `GROUPS`, `JOINED`, `LEFT`, `USERS`, `USER_JOINED`, `USER_LEFT`, `POST`, `CONTENT`, `ERROR` |
+### Requests and responses
 
-The public board is group `0`. Groups `1`–`5` are the private groups.
+| Client → Server | Server → Client | Sent to others in the group |
+| --- | --- | --- |
+| *(on connect)* | `WELCOME <text>` | |
+| `NAME <username>` | `NAME_OK <username>` then `GROUPS <g1> … <g5>`, or `NAME_BAD <reason>` | |
+| `GROUPS` | `GROUPS <g1> <g2> <g3> <g4> <g5>` | |
+| `JOIN <group>` | `JOINED <group>`, `USERS <group> <user list>`, then up to 2 `POST` lines (the last 2 messages) | `USER_JOINED <group> <username>` |
+| `LEAVE <group>` | `LEFT <group>` | `USER_LEFT <group> <username>` |
+| `USERS <group>` | `USERS <group> <user list>` | |
+| `POST <group> <subject> <body>` | `POST <group> <id> <sender> <date> <subject>` | the same `POST` line |
+| `MESSAGE <group> <id>` | `CONTENT <group> <id> <sender> <date> <subject> <body>` | |
+| `EXIT` | the server closes the connection | `USER_LEFT <group> <username>` for each group the user was in |
+
+The `<user list>` is one field with names separated by `, `. Dates use the format `YYYY-MM-DD HH:MM`.
+
+### Errors
+
+Any request that fails gets `ERROR <reason>`, for example:
+
+- a request sent before choosing a username
+- an unknown group
+- a group action from a user who isn't in that group
+- a missing or invalid message ID
+- a post without a subject or body
 
 ---
 

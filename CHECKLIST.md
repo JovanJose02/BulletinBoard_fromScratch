@@ -40,7 +40,7 @@
 ### Protocol
 
 - [x] Agree on one message format (plain text or JSON) for both sides
-- [ ] Write down the request and response format for every command
+- [x] Write down the request and response format for every command
 - [x] Keep notifications the server pushes separate from replies to requests
 
 ---
