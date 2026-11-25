@@ -46,15 +46,21 @@ No extra packages are needed.
 
 ## How to Run
 
-### Quick start (everything at once)
+### Testing alone on one computer
 
-Copy and paste this into a terminal from the project folder (macOS/Linux). It compiles the client, starts the server, opens the GUI, and starts a console client in the same terminal:
+Open **3 terminals** in the project folder:
 
-```bash
-make && { python3 server.py > /dev/null & S=$!; sleep 1; python3 gui.py & G=$!; java Client; kill $S $G; }
-```
+| Terminal | Command | What it does |
+| -------- | ------------- | ----------------------- |
+| 1 | `make server` | Starts the server |
+| 2 | `make client` | First user (console) |
+| 3 | `make client` | Second user (console) |
 
-In the console client, type `%connect localhost 6789` and then a username. In the GUI, click **Connect** with a different username. Type `%exit` in the console client to quit, which also stops the server and closes the GUI.
+For the GUI, use `make gui` instead of `make client` in terminal 2 or 3.
+
+In each client, type `%connect localhost 6789`, then pick a different username for each one. Both users need to `%join` the same board to see each other with `%users`.
+
+Only start the server once. Each server has its own users and messages, so clients on different servers can't see each other.
 
 ### Step by step
 
