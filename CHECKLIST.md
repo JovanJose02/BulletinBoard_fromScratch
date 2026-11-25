@@ -88,7 +88,7 @@
 - [X] README explains usage if it differs from the suggested commands
 - [X] README describes major issues and how we handled them
 - [X] Makefile (optional, but useful for compiling the Java client)
-- [ ] Folder named `Project2-AskerFredy-GehlotJohnson` (check the last-name order with the group)
+- [X] Folder named `Project2-JoseAskerFredy-Gehlot-Johnson`
 - [ ] Zip the folder without any binaries (no `.class` files) and submit it to Canvas
 
 ## Bonus
